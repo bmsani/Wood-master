@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import React, { useEffect } from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Login = () => {
@@ -18,6 +18,17 @@ const Login = () => {
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
     };
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if(user || gUser){
+            navigate(from,{replace:true})
+        }
+    },[from, user, navigate, gUser])
+
     return (
         <div class="card w-96 m-auto bg-base-100 shadow-xl mt-9">
             <h1 className='text-center text-primary text-4xl font-bold'>Login</h1>
@@ -71,7 +82,11 @@ const Login = () => {
                     <input type="submit" value={"submit"} placeholder="Type here" class="w-full max-w-xs btn border-t-zinc-90" />
                 </form>
                 <p>New to Wood-Master <Link to='/register' className='btn btn-link lowercase'> register here</Link> </p>
+            <div class="divider">OR</div>
+
+            <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
             </div>
+
         </div>
     );
 };

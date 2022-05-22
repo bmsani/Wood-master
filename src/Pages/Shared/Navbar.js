@@ -1,7 +1,15 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, NavLink } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Navbar = () => {
+    const [user] = useAuthState(auth)
+
+    const handleSignOut = () => {
+        signOut(auth);
+    }
     const menuItem = <>
         <li><NavLink to="/myPortfolio">My Portfolio</NavLink></li>
         <li><NavLink to="/blog">Blog</NavLink></li>
@@ -27,11 +35,19 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <div className="flex flex-row w-full justify-end">
-                    <div className="grid card place-items-center">User</div>
-                    <div className="divider lg:divider-horizontal"></div>
-                    <div className="grid card place-items-center"> <button className='btn btn-ghost'> Sign Out</button> </div>
-                </div>
+
+                {
+                    user ?
+
+                        <div className="flex flex-row w-full justify-end">
+                            <div className="grid card place-items-center">{user.displayName}</div>
+                            <div className="divider lg:divider-horizontal"></div>
+                            <div className="grid card place-items-center"> <button onClick={handleSignOut} className='btn btn-ghost'> Sign Out</button> </div>
+                        </div>
+                        :
+                        <button className='btn btn-ghost'> <Link to='/login'>Login</Link></button>
+
+                }
             </div>
         </div>
     );

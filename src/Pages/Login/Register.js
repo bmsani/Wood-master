@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -11,8 +11,19 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification: true});
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, profError] = useUpdateProfile(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if(user || gUser){
+            navigate(from,{replace:true})
+        }
+    },[from, user, navigate, gUser])
 
     const onSubmit = async (data) => {
 
@@ -91,10 +102,14 @@ const Register = () => {
                     <input type="submit" value={"submit"} placeholder="Type here" class="w-full max-w-xs btn border-t-zinc-90" />
                 </form>
                 <p>Already Registered?<Link to="/login" className='btn btn-link lowercase'>login here</Link> </p>
+                <div class="divider">OR</div>
 
-            </div>
+                <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
+            
         </div>
+        </div >
     );
 };
 
 export default Register;
+
