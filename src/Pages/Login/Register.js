@@ -11,7 +11,7 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification: true});
     const [updateProfile, updating, profError] = useUpdateProfile(auth);
 
     const onSubmit = async (data) => {
