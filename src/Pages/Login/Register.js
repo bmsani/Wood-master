@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import Loading from '../Shared/Loading';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -24,6 +25,10 @@ const Register = () => {
             navigate(from,{replace:true})
         }
     },[from, user, navigate, gUser])
+
+    if(loading || gLoading){
+        return <Loading></Loading>
+    }
 
     const onSubmit = async (data) => {
 

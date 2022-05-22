@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -23,11 +24,15 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
+    
     useEffect(() => {
         if(user || gUser){
             navigate(from,{replace:true})
         }
     },[from, user, navigate, gUser])
+    if(loading || gLoading){
+        return <Loading></Loading>
+    }
 
     return (
         <div class="card w-96 m-auto bg-base-100 shadow-xl mt-9">
