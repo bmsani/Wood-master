@@ -15,7 +15,9 @@ const Navbar = () => {
         <li><NavLink to="/myPortfolio">My Portfolio</NavLink></li>
         <li><NavLink to="/blog">Blog</NavLink></li>
         <li><NavLink to="/purchase">Purchase</NavLink></li>
-        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        {
+            user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        }
     </>
     return (
         <div className="navbar bg-base-100">
