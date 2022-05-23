@@ -8,6 +8,7 @@ const Navbar = () => {
     const [user] = useAuthState(auth)
 
     const handleSignOut = () => {
+        localStorage.removeItem('accessToken')
         signOut(auth);
     }
     const menuItem = <>

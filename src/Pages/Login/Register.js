@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -19,14 +20,16 @@ const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const [token] = useToken(user || gUser)
+
 
     useEffect(() => {
-        if(user || gUser){
-            navigate(from,{replace:true})
+        if (token) {
+            navigate(from, { replace: true })
         }
-    },[from, user, navigate, gUser])
+    }, [from, user, navigate, gUser, token])
 
-    if(loading || gLoading){
+    if (loading || gLoading) {
         return <Loading></Loading>
     }
 
@@ -36,6 +39,7 @@ const Register = () => {
         await updateProfile({ displayName: data.name })
         console.log('update done');
     };
+
     return (
 
         <div class="card w-96 m-auto bg-base-100 shadow-xl mt-9">
@@ -110,8 +114,8 @@ const Register = () => {
                 <div class="divider">OR</div>
 
                 <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
-            
-        </div>
+
+            </div>
         </div >
     );
 };
