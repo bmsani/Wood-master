@@ -11,7 +11,12 @@ const useAdmin = user => {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403){
+                    console.log('token did not match');
+                }
+                return res.json()
+            })
             .then(data => {
                 setAdmin(data.admin)
                 setAdminLoading(false);

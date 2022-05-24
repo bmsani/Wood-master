@@ -2,7 +2,7 @@ import React from 'react';
 
 const Blog = () => {
     return (
-        <div className='w-11/12 mx-auto'>
+        <div className='w-11/12 mx-auto pb-12'>
             <h1 className='text-5xl text-center font-bold pt-5 pb-7'>Frequently Asked Questions</h1>
             <div class="collapse collapse-arrow border border-base-300 rounded-box">
                 <input type="checkbox" class="peer" />

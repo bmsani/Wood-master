@@ -15,7 +15,12 @@ const useToken = user => {
                 },
                 body:JSON.stringify(currentUser)
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403){
+                    console.log('token did not match');
+                }
+                return res.json()
+            })
             .then(data => {
                 const accessToken = data.token;
                 localStorage.setItem('accessToken', accessToken);

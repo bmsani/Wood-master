@@ -16,10 +16,11 @@ const MyPortfolio = () => {
                     <p> <span className="text-xl text-neutral font-bold">Education : </span> Honours</p>
                     <p> <span className="text-xl text-neutral font-bold">Year : </span> 4th year</p>
                     <p> <span className="text-xl text-neutral font-bold">Subject : </span> Management</p>
-                    <p> <span className="text-xl text-neutral font-bold">Web devlopment Skills : </span> Html, css, (basic)Javascript, react, (basic)mongodb</p>
+                    <p> <span className="text-xl text-neutral font-bold">Web development Skills : </span> Html, css, Javascript (basic), React, mongodb (basic)</p>
                     <p> <span className="text-xl text-neutral font-bold">Practice project link 1 : </span> <button className='btn btn-link'>https://mountain-rockers.web.app/</button> </p>
                     <p> <span className="text-xl text-neutral font-bold">Practice project link 2 : </span> <button className='btn btn-link'>https://assingment-10-a59fb.web.app/</button> </p>
                     <p> <span className="text-xl text-neutral font-bold">Practice project link 3 : </span> <button className='btn btn-link'>https://my-todo-app-5605a.web.app/</button> </p>
+                    
 
                     
                 </div>

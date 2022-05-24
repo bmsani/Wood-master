@@ -60,7 +60,7 @@ const Register = () => {
                             })}
                         />
                         <label class="label">
-                            {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
+                            {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}
                         </label>
                     </div>
 
