@@ -46,7 +46,7 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {
-                        users.map((user, index) => <tr className={`${index % 2 === 0 && 'active'}`}>
+                       users && users.map((user, index) => <tr className={`${index % 2 === 0 && 'active'}`}>
                             <th>{index + 1}</th>
                             <td>{user.email}</td>
                             {
