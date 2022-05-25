@@ -24,8 +24,8 @@ const AddProduct = () => {
             method: 'POST',
             body: formData
         })
-            .then(res => res.json())
-            .then(result => {
+        .then(res => res.json())
+        .then(result => {
                 if (result.success) {
                     const img = result.data.url;
                     const product = {
@@ -153,7 +153,7 @@ const AddProduct = () => {
                         {...register("productImg", {
                             required: {
                                 value: true,
-                                message: "Price is required"
+                                message: "Image is required"
                             }
                         })}
                     />
