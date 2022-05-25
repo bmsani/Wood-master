@@ -16,7 +16,7 @@ const Products = () => {
     return (
         <div>
             <p className='font-bold text-4xl text-center'>Choose your Tools</p>
-            <div className='grid grid-cols-3 gap-5'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
                     slisedProduct.map(product => <SingleProduct key={product._id} product={product}></SingleProduct>)
                 }
