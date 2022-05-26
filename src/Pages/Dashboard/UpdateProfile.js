@@ -56,8 +56,8 @@ const UpdateProfile = () => {
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            if(inserted.insertedId){
-                                cogoToast.success('Successful',{heading:'Profile Update', position: 'top-right'});
+                            if (inserted.insertedId) {
+                                cogoToast.success('Successful', { heading: 'Profile Update', position: 'top-right' });
                                 reset();
                                 navigate('/dashboard/myProfile')
                             }
@@ -70,11 +70,11 @@ const UpdateProfile = () => {
             <h1>Update Profile</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-1">
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Product name</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Product name</span>
                     </label>
-                    <input type="text" placeholder="Product Name" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Product Name" className="input input-bordered w-full max-w-xs"
                         {...register("name", {
                             required: {
                                 value: true,
@@ -82,41 +82,41 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}
+                    <label className="label">
+                        {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                     </label>
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Role</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Role</span>
                     </label>
-                    <input value={role || 'User'} type="text" placeholder="Product price $" class="input input-bordered w-full max-w-xs"
+                    <input value={role || 'User'} type="text" placeholder="Product price $" className="input input-bordered w-full max-w-xs"
                         {...register("role")}
                     />
-                    {/* <label class="label">
-                        {errors.role?.type === 'required' && <span class="label-text-alt text-red-500">{errors.role.message}</span>}
+                    {/* <label className="label">
+                        {errors.role?.type === 'required' && <span className="label-text-alt text-red-500">{errors.role.message}</span>}
                     </label> */}
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text">Email</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Email</span>
                     </label>
-                    <input type="email" value={email} placeholder="Type email" class="input input-bordered w-full max-w-xs"
+                    <input type="email" value={email} placeholder="Type email" className="input input-bordered w-full max-w-xs"
                         {...register("email")}
                     />
-                    {/* <label class="label">
-                            {errors.email?.type === 'required' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
-                            {errors.email?.type === 'pattern' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
+                    {/* <label className="label">
+                            {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                            {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                         </label> */}
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Education</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Education</span>
                     </label>
-                    <input type="text" placeholder="Your education" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Your education" className="input input-bordered w-full max-w-xs"
                         {...register("education", {
                             required: {
                                 value: true,
@@ -124,16 +124,16 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.education?.type === 'required' && <span class="label-text-alt text-red-500">{errors.education.message}</span>}
+                    <label className="label">
+                        {errors.education?.type === 'required' && <span className="label-text-alt text-red-500">{errors.education.message}</span>}
                     </label>
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Location</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Location</span>
                     </label>
-                    <input type="text" placeholder="Your city" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Your city" className="input input-bordered w-full max-w-xs"
                         {...register("location", {
                             required: {
                                 value: true,
@@ -141,16 +141,16 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.location?.type === 'required' && <span class="label-text-alt text-red-500">{errors.location.message}</span>}
+                    <label className="label">
+                        {errors.location?.type === 'required' && <span className="label-text-alt text-red-500">{errors.location.message}</span>}
                     </label>
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Phone</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Phone</span>
                     </label>
-                    <input type="number" placeholder="Your Phone" class="input input-bordered w-full max-w-xs"
+                    <input type="number" placeholder="Your Phone" className="input input-bordered w-full max-w-xs"
                         {...register("phone", {
                             required: {
                                 value: true,
@@ -158,16 +158,16 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.phone?.type === 'required' && <span class="label-text-alt text-red-500">{errors.phone.message}</span>}
+                    <label className="label">
+                        {errors.phone?.type === 'required' && <span className="label-text-alt text-red-500">{errors.phone.message}</span>}
                     </label>
                 </div>
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Linkedin</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Linkedin</span>
                     </label>
-                    <input type="text" placeholder="Linkedin link" class="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Linkedin link" className="input input-bordered w-full max-w-xs"
                         {...register("profLink", {
                             required: {
                                 value: true,
@@ -175,18 +175,18 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.profLink?.type === 'required' && <span class="label-text-alt text-red-500">{errors.profLink.message}</span>}
+                    <label className="label">
+                        {errors.profLink?.type === 'required' && <span className="label-text-alt text-red-500">{errors.profLink.message}</span>}
                     </label>
                 </div>
 
 
 
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text font-bold">Profile Picture</span>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text font-bold">Profile Picture</span>
                     </label>
-                    <input type="file" placeholder="Product Short Details" class=""
+                    <input type="file" placeholder="Product Short Details" className=""
                         {...register("userImg", {
                             required: {
                                 value: true,
@@ -194,14 +194,14 @@ const UpdateProfile = () => {
                             }
                         })}
                     />
-                    <label class="label">
-                        {errors.userImg?.type === 'required' && <span class="label-text-alt text-red-500">{errors.userImg.message}</span>}
+                    <label className="label">
+                        {errors.userImg?.type === 'required' && <span className="label-text-alt text-red-500">{errors.userImg.message}</span>}
                     </label>
                 </div>
 
 
 
-                <input type="submit" value={"submit"} placeholder="Type here" class="w-full max-w-xs btn border-t-zinc-90" />
+                <input type="submit" value={"submit"} placeholder="Type here" className="w-full max-w-xs btn border-t-zinc-90" />
             </form>
         </div>
     );

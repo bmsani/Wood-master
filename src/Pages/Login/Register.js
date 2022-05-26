@@ -42,16 +42,16 @@ const Register = () => {
 
     return (
 
-        <div class="card w-96 m-auto bg-base-100 shadow-xl mt-9">
+        <div className="card w-96 m-auto bg-base-100 shadow-xl mt-9">
             <h1 className='text-center text-primary text-4xl font-bold'>Sign Up</h1>
-            <div class="card-body">
+            <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5">
 
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text font-bold">Name</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text font-bold">Name</span>
                         </label>
-                        <input type="text" placeholder="Your Name" class="input input-bordered w-full max-w-xs"
+                        <input type="text" placeholder="Your Name" className="input input-bordered w-full max-w-xs"
                             {...register("name", {
                                 required: {
                                     value: true,
@@ -59,16 +59,16 @@ const Register = () => {
                                 }
                             })}
                         />
-                        <label class="label">
-                            {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}
+                        <label className="label">
+                            {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                         </label>
                     </div>
 
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text font-bold">Email</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text font-bold">Email</span>
                         </label>
-                        <input type="email" placeholder="Your Email" class="input input-bordered w-full max-w-xs"
+                        <input type="email" placeholder="Your Email" className="input input-bordered w-full max-w-xs"
                             {...register("email", {
                                 required: {
                                     value: true,
@@ -80,17 +80,17 @@ const Register = () => {
                                 }
                             })}
                         />
-                        <label class="label">
-                            {errors.email?.type === 'required' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
-                            {errors.email?.type === 'pattern' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
+                        <label className="label">
+                            {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                            {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                         </label>
                     </div>
 
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text font-bold">Password</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text font-bold">Password</span>
                         </label>
-                        <input type="password" placeholder="Type Password" class="input input-bordered w-full max-w-xs"
+                        <input type="password" placeholder="Type Password" className="input input-bordered w-full max-w-xs"
                             {...register("password", {
                                 required: {
                                     value: true,
@@ -102,16 +102,16 @@ const Register = () => {
                                 }
                             })}
                         />
-                        <label class="label">
-                            {errors.password?.type === 'required' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
-                            {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
+                        <label className="label">
+                            {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
+                            {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                         </label>
                     </div>
 
-                    <input type="submit" value={"submit"} placeholder="Type here" class="w-full max-w-xs btn border-t-zinc-90" />
+                    <input type="submit" value={"submit"} placeholder="Type here" className="w-full max-w-xs btn border-t-zinc-90" />
                 </form>
                 <p>Already Registered?<Link to="/login" className='btn btn-link lowercase'>login here</Link> </p>
-                <div class="divider">OR</div>
+                <div className="divider">OR</div>
 
                 <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
 

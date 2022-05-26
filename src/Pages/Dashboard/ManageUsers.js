@@ -35,8 +35,8 @@ const ManageUsers = () => {
             })
     }
     return (
-        <div class="overflow-x-auto">
-            <table class="table w-full">
+        <div className="overflow-x-auto">
+            <table className="table w-full">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -46,7 +46,7 @@ const ManageUsers = () => {
                 </thead>
                 <tbody>
                     {
-                       users && users.map((user, index) => <tr key={user._id} className={`${index % 2 === 0 && 'active'}`}>
+                        users && users.map((user, index) => <tr key={user._id} className={`${index % 2 === 0 && 'active'}`}>
                             <th>{index + 1}</th>
                             <td>{user.email}</td>
                             {

@@ -13,10 +13,10 @@ const Login = () => {
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
-      if(user){
-          console.log(user);
-      }
+    ] = useSignInWithEmailAndPassword(auth);
+    if (user) {
+        console.log(user);
+    }
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
     };
@@ -26,27 +26,27 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
     const [token] = useToken(user || gUser)
 
-    
+
     useEffect(() => {
-        if(token){
-            navigate(from,{replace:true})
+        if (token) {
+            navigate(from, { replace: true })
         }
-    },[from, navigate, token])
-    if(loading || gLoading){
+    }, [from, navigate, token])
+    if (loading || gLoading) {
         return <Loading></Loading>
     }
 
     return (
-        <div class="card w-96 m-auto bg-base-100 shadow-xl mt-9">
+        <div className="card w-96 m-auto bg-base-100 shadow-xl mt-9">
             <h1 className='text-center text-primary text-4xl font-bold'>Login</h1>
-            <div class="card-body">
+            <div className="card-body">
                 <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5">
 
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Email</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Email</span>
                         </label>
-                        <input type="email" placeholder="Type here" class="input input-bordered w-full max-w-xs"
+                        <input type="email" placeholder="Type here" className="input input-bordered w-full max-w-xs"
                             {...register("email", {
                                 required: {
                                     value: true,
@@ -58,17 +58,17 @@ const Login = () => {
                                 }
                             })}
                         />
-                        <label class="label">
-                            {errors.email?.type === 'required' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
-                            {errors.email?.type === 'pattern' && <span class="label-text-alt text-red-500">{errors.email.message}</span>}
+                        <label className="label">
+                            {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                            {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                         </label>
                     </div>
 
-                    <div class="form-control w-full max-w-xs">
-                        <label class="label">
-                            <span class="label-text">Password</span>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Password</span>
                         </label>
-                        <input type="password" placeholder="Type Password" class="input input-bordered w-full max-w-xs"
+                        <input type="password" placeholder="Type Password" className="input input-bordered w-full max-w-xs"
                             {...register("password", {
                                 required: {
                                     value: true,
@@ -80,18 +80,18 @@ const Login = () => {
                                 }
                             })}
                         />
-                        <label class="label">
-                            {errors.password?.type === 'required' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
-                            {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
+                        <label className="label">
+                            {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
+                            {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
                         </label>
                     </div>
 
-                    <input type="submit" value={"submit"} placeholder="Type here" class="w-full max-w-xs btn border-t-zinc-90" />
+                    <input type="submit" value={"submit"} placeholder="Type here" className="w-full max-w-xs btn border-t-zinc-90" />
                 </form>
                 <p>New to Wood-Master <Link to='/register' className='btn btn-link lowercase'> register here</Link> </p>
-            <div class="divider">OR</div>
+                <div className="divider">OR</div>
 
-            <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
+                <button onClick={() => signInWithGoogle()} className='btn btn-info capitalize text-white'> Sign Up with Google</button>
             </div>
 
         </div>

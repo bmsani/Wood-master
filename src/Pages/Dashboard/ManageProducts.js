@@ -38,14 +38,14 @@ const ManageProducts = () => {
                             )
                         }
                     })
-                
+
             }
         })
     }
     return (
         <div>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
 
                     <thead>
                         <tr>
@@ -62,8 +62,8 @@ const ManageProducts = () => {
                                 <tr className={`${index % 2 === 0 && 'active'}`}>
                                     <th>{index + 1}</th>
                                     <td>
-                                        <div class="avatar">
-                                            <div class="mask mask-squircle w-12 h-12">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
                                                 <img src={product.img} alt='' />
                                             </div>
                                         </div>
