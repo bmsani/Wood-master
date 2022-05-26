@@ -3,16 +3,17 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import auth from '../../firebase.init';
 import SingleProduct from '../Home/SingleProduct';
 import Loading from '../Shared/Loading';
 
 const Purchase = () => {
     const { id } = useParams()
-    console.log(id);
     const [user] = useAuthState(auth);
     const email = user?.email;
+    const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const { data: singleProduct, isLoading, refetch } = useQuery('singleProduct', () => fetch(`http://localhost:5000/singleProduct/${id}`).then(res => res.json()))
 
@@ -58,7 +59,22 @@ const Purchase = () => {
                             .then(res => res.json())
                             .then(inserted => {
                                 if(inserted.insertedId){
+                                    console.log(inserted);
                                     refetch();
+                                    reset()
+                                    Swal.fire({
+                                        title: 'Order Successful',
+                                        text: "Ready For Payment?",
+                                        icon: 'success',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: "Let's Go"
+                                      }).then((result) => {
+                                        if (result.isConfirmed) {
+                                          navigate(`/order/${inserted.insertedId}`)
+                                        }
+                                      })
                                 }
                             })
                     }
