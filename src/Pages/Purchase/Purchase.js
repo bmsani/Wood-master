@@ -15,7 +15,12 @@ const Purchase = () => {
     const email = user?.email;
     const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const { data: singleProduct, isLoading, refetch } = useQuery('singleProduct', () => fetch(`http://localhost:5000/singleProduct/${id}`).then(res => res.json()))
+    const { data: singleProduct, isLoading, refetch } = useQuery('singleProduct', () => fetch(`http://localhost:5000/singleProduct/${id}`,{
+        headers:{
+
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
 
     if (isLoading) {
         return <Loading></Loading>
@@ -32,7 +37,7 @@ const Purchase = () => {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
-
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(newQuantity)
             })
@@ -52,7 +57,7 @@ const Purchase = () => {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
-
+                                authorization: `Bearer ${localStorage.getItem('accessToken')}`
                             },
                             body: JSON.stringify(order)
                         })

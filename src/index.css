@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* font-family */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Spectral:ital,wght@0,700;1,500&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.lobsterFont{
+    font-family: 'Lobster', cursive;
+}

@@ -17,8 +17,8 @@ const Products = () => {
 
     return (
         <div>
-            <p className='font-bold text-4xl text-center'>Choose your Tools</p>
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
+            <p className='font-bold text-5xl text-center py-10 text-error'>Choose your Tools</p>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 lg:w-11/12 mx-auto'>
                 {
                     slicedProduct?.map(product => <SingleProduct key={product._id} product={product}>
                     <HandleBtn id={product._id}></HandleBtn>

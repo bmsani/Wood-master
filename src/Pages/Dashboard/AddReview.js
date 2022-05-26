@@ -20,6 +20,7 @@ const AddReview = () => {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(data)
 
@@ -71,7 +72,7 @@ const AddReview = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Your Review</span>
                             </label>
-                            <textarea type="text" placeholder="Linkedin link" className="input input-bordered w-full h-24"
+                            <textarea type="text" placeholder="Review message" className="input input-bordered w-full h-24"
                                 {...register("review", {
                                     required: {
                                         value: true,

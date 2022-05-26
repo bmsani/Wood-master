@@ -10,11 +10,11 @@ const Banner = () => {
                 backgroundSize: 'cover'
             }}>
                 <div className="hero-overlay bg-opacity-60"></div>
-                <div className="hero-content text-left text-neutral-content">
-                    <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                        <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary">Get Started</button>
+                <div className="hero-content text-center text-neutral-content">
+                    <div className="max-w-lg">
+                        <h1 className="mb-5 text-5xl font-bold">Welcome to <span className='lobsterFont text-error'>WoodMaster</span></h1>
+                        <p className="mb-5">Here you can buy Wood working parts for your wholesale or Retail shop/business. We have world wide shipping & payment service so you don't have to worry about payment and product delivery. </p>
+                        <button className="btn btn-info text-white">Get Started</button>
                     </div>
                 </div>
             </div>

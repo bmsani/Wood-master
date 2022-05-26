@@ -10,7 +10,7 @@ const HandleBtn = ({ id }) => {
     }
     return (
         <div className="card-actions justify-end">
-            <button onClick={() => handleBuyNow(id)} className="btn btn-primary">Buy Now</button>
+            <button onClick={() => handleBuyNow(id)} className="btn btn-info text-white">Buy Now</button>
         </div>
     );
 };

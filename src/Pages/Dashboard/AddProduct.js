@@ -41,6 +41,7 @@ const AddProduct = () => {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(product)
 
@@ -59,13 +60,13 @@ const AddProduct = () => {
         <div>
             <h1 className="text-4xl text-center font-bold pb-5">Add Product</h1>
             <div>
-                <form onSubmit={handleSubmit(onSubmit)} className="grid gap-1 justify-center">
+                <form onSubmit={handleSubmit(onSubmit)} className="grid gap-1 lg:w-2/4 mx-auto">
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Product name</span>
                     </label>
-                    <input type="text" placeholder="Product Name" className="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Product Name" className="input input-bordered w-full"
                         {...register("name", {
                             required: {
                                 value: true,
@@ -78,11 +79,11 @@ const AddProduct = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Price</span>
                     </label>
-                    <input type="number" placeholder="Product price $" className="input input-bordered w-full max-w-xs"
+                    <input type="number" placeholder="Product price $" className="input input-bordered w-full"
                         {...register("price", {
                             required: {
                                 value: true,
@@ -95,11 +96,11 @@ const AddProduct = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Minimum Purchase Quantity</span>
                     </label>
-                    <input type="number" placeholder="Minimum Purchase Quantity" className="input input-bordered w-full max-w-xs"
+                    <input type="number" placeholder="Minimum Purchase Quantity" className="input input-bordered w-full"
                         {...register("minQuantity", {
                             required: {
                                 value: true,
@@ -112,11 +113,11 @@ const AddProduct = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Available Product Quantity</span>
                     </label>
-                    <input type="number" placeholder="Available Product Quantity" className="input input-bordered w-full max-w-xs"
+                    <input type="number" placeholder="Available Product Quantity" className="input input-bordered w-full"
                         {...register("availableQuantity", {
                             required: {
                                 value: true,
@@ -129,11 +130,11 @@ const AddProduct = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Product Description</span>
                     </label>
-                    <textarea type="number" placeholder="Product Short Details" className="input input-bordered w-full max-w-xs"
+                    <textarea type="number" placeholder="Product Short Details" className="input input-bordered w-full"
                         {...register("description", {
                             required: {
                                 value: true,
@@ -146,7 +147,7 @@ const AddProduct = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Product Image</span>
                     </label>
@@ -165,7 +166,7 @@ const AddProduct = () => {
 
 
 
-                <input type="submit" value={"submit"} placeholder="Type here" className="w-full max-w-xs btn border-t-zinc-90" />
+                <input type="submit" value={"submit"} placeholder="Type here" className="w-full btn border-t-zinc-90" />
             </form>
             </div>
         </div>

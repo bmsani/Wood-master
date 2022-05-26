@@ -16,7 +16,11 @@ const UpdateProfile = () => {
     const imgBbKey = 'b8623ae84b8ddec30bf73b1abc12cd47';
 
 
-    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`http://localhost:5000/singleUser?email=${userMail}`).then(res => res.json()))
+    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`http://localhost:5000/singleUser?email=${userMail}`,{
+        headers:{
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
     if (isLoading) {
         return <Loading></Loading>
 
@@ -50,16 +54,20 @@ const UpdateProfile = () => {
                     fetch(`http://localhost:5000/singleUser/${currentUser}`, {
                         method: "PUT",
                         headers: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(updateUser)
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            if (inserted.insertedId) {
+                            
+                            if(inserted.acknowledged) {
                                 cogoToast.success('Successful', { heading: 'Profile Update', position: 'top-right' });
                                 reset();
                                 navigate('/dashboard/myProfile')
+                            }else{
+                                console.log(inserted);
                             }
                         })
                 }
@@ -67,14 +75,14 @@ const UpdateProfile = () => {
     }
     return (
         <div>
-            <h1>Update Profile</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-1">
+            <h1 className='text-4xl text-center font-bold pb-5'>Update Profile</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-1 lg:w-2/4 mx-auto">
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
-                        <span className="label-text font-bold">Product name</span>
+                        <span className="label-text font-bold">Your name</span>
                     </label>
-                    <input type="text" placeholder="Product Name" className="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Your Name" className="input input-bordered w-full"
                         {...register("name", {
                             required: {
                                 value: true,
@@ -87,36 +95,31 @@ const UpdateProfile = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Role</span>
                     </label>
-                    <input value={role || 'User'} type="text" placeholder="Product price $" className="input input-bordered w-full max-w-xs"
+                    <input value={role || 'User'} type="text" placeholder="Product price $" className="input input-bordered w-full"
                         {...register("role")}
                     />
-                    {/* <label className="label">
-                        {errors.role?.type === 'required' && <span className="label-text-alt text-red-500">{errors.role.message}</span>}
-                    </label> */}
+                    
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="email" value={email} placeholder="Type email" className="input input-bordered w-full max-w-xs"
+                    <input type="email" value={email} placeholder="Type email" className="input input-bordered w-full"
                         {...register("email")}
                     />
-                    {/* <label className="label">
-                            {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                            {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                        </label> */}
+                    
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Education</span>
                     </label>
-                    <input type="text" placeholder="Your education" className="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Your education" className="input input-bordered w-full"
                         {...register("education", {
                             required: {
                                 value: true,
@@ -129,11 +132,11 @@ const UpdateProfile = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Location</span>
                     </label>
-                    <input type="text" placeholder="Your city" className="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Your city" className="input input-bordered w-full"
                         {...register("location", {
                             required: {
                                 value: true,
@@ -146,11 +149,11 @@ const UpdateProfile = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Phone</span>
                     </label>
-                    <input type="number" placeholder="Your Phone" className="input input-bordered w-full max-w-xs"
+                    <input type="number" placeholder="Your Phone" className="input input-bordered w-full"
                         {...register("phone", {
                             required: {
                                 value: true,
@@ -163,11 +166,11 @@ const UpdateProfile = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Linkedin</span>
                     </label>
-                    <input type="text" placeholder="Linkedin link" className="input input-bordered w-full max-w-xs"
+                    <input type="text" placeholder="Linkedin link" className="input input-bordered w-full"
                         {...register("profLink", {
                             required: {
                                 value: true,
@@ -182,7 +185,7 @@ const UpdateProfile = () => {
 
 
 
-                <div className="form-control w-full max-w-xs">
+                <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text font-bold">Profile Picture</span>
                     </label>
@@ -201,7 +204,7 @@ const UpdateProfile = () => {
 
 
 
-                <input type="submit" value={"submit"} placeholder="Type here" className="w-full max-w-xs btn border-t-zinc-90" />
+                <input type="submit" value={"submit"} placeholder="Type here" className="w-full btn border-t-zinc-90" />
             </form>
         </div>
     );
