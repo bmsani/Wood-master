@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
 
 const ManageUsers = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/user', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://quiet-chamber-70480.herokuapp.com/user', {
         method: 'Get',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -14,7 +14,7 @@ const ManageUsers = () => {
         return <Loading></Loading>
     }
     const handleAdmin = email => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://quiet-chamber-70480.herokuapp.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

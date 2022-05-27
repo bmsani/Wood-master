@@ -10,8 +10,8 @@ const MyProfile = () => {
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
     const userMail = user?.email;
-    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`http://localhost:5000/singleUser?email=${userMail}`,{
-        headers:{
+    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`https://quiet-chamber-70480.herokuapp.com/singleUser?email=${userMail}`, {
+        headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()))
@@ -33,7 +33,7 @@ const MyProfile = () => {
                     </div>
                 </div>
                 <div className="card-body">
-                    <h2 className="card-title text-4xl font-bold mx-auto">Name: {user.displayName || name || 'Not Available' }</h2>
+                    <h2 className="card-title text-4xl font-bold mx-auto">Name: {user.displayName || name || 'Not Available'}</h2>
                     <p> <span className="text-xl text-neutral font-bold">Role : </span> {role || 'User'}</p>
                     <p> <span className="text-xl text-neutral font-bold">Email : </span> {email}</p>
                     <p> <span className="text-xl text-neutral font-bold">Education : </span> {education || 'Not Available'}</p>

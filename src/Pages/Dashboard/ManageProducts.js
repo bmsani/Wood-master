@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import Loading from '../Shared/Loading';
 
 const ManageProducts = () => {
-    const { data: products, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/product').then(res => res.json()))
+    const { data: products, isLoading, refetch } = useQuery('users', () => fetch('https://quiet-chamber-70480.herokuapp.com/product').then(res => res.json()))
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -19,7 +19,7 @@ const ManageProducts = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `http://localhost:5000/product/${id}`
+                const url = `https://quiet-chamber-70480.herokuapp.com/product/${id}`
                 fetch(url, {
                     method: 'DELETE',
                     headers: {

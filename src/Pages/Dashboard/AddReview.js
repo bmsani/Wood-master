@@ -13,11 +13,11 @@ const AddReview = () => {
     if (loading) {
         return <Loading></Loading>
     }
-    
+
 
     const onSubmit = async (data) => {
         console.log(data);
-        fetch('http://localhost:5000/review', {
+        fetch('https://quiet-chamber-70480.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

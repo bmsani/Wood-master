@@ -9,7 +9,7 @@ const MyOrders = () => {
     const navigate = useNavigate()
     const [user] = useAuthState(auth);
     const email = user?.email;
-    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/order?email=${email}`, {
+    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`https://quiet-chamber-70480.herokuapp.com/order?email=${email}`, {
         method: 'Get',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

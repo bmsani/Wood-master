@@ -16,8 +16,8 @@ const UpdateProfile = () => {
     const imgBbKey = 'b8623ae84b8ddec30bf73b1abc12cd47';
 
 
-    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`http://localhost:5000/singleUser?email=${userMail}`,{
-        headers:{
+    const { data: singleUsers, isLoading, refetch } = useQuery('singleUsers', () => fetch(`https://quiet-chamber-70480.herokuapp.com/singleUser?email=${userMail}`, {
+        headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()))
@@ -51,7 +51,7 @@ const UpdateProfile = () => {
                         img: img
                     }
 
-                    fetch(`http://localhost:5000/singleUser/${currentUser}`, {
+                    fetch(`https://quiet-chamber-70480.herokuapp.com/singleUser/${currentUser}`, {
                         method: "PUT",
                         headers: {
                             'content-type': 'application/json',
@@ -61,12 +61,12 @@ const UpdateProfile = () => {
                     })
                         .then(res => res.json())
                         .then(inserted => {
-                            
-                            if(inserted.acknowledged) {
+
+                            if (inserted.acknowledged) {
                                 cogoToast.success('Successful', { heading: 'Profile Update', position: 'top-right' });
                                 reset();
                                 navigate('/dashboard/myProfile')
-                            }else{
+                            } else {
                                 console.log(inserted);
                             }
                         })
@@ -102,7 +102,7 @@ const UpdateProfile = () => {
                     <input value={role || 'User'} type="text" placeholder="Product price $" className="input input-bordered w-full"
                         {...register("role")}
                     />
-                    
+
                 </div>
 
                 <div className="form-control w-full">
@@ -112,7 +112,7 @@ const UpdateProfile = () => {
                     <input type="email" value={email} placeholder="Type email" className="input input-bordered w-full"
                         {...register("email")}
                     />
-                    
+
                 </div>
 
                 <div className="form-control w-full">

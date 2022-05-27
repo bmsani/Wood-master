@@ -5,6 +5,7 @@ import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading';
 import useToken from '../../hooks/useToken';
+import cogoToast from 'cogo-toast';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -31,6 +32,9 @@ const Register = () => {
 
     if (loading || gLoading) {
         return <Loading></Loading>
+    }
+    if(error || gError){
+        cogoToast.error(`${error.message || gError.message }`, {heading:'Error',position:'top-right'})
     }
 
     const onSubmit = async (data) => {

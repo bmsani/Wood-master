@@ -15,8 +15,8 @@ const Purchase = () => {
     const email = user?.email;
     const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const { data: singleProduct, isLoading, refetch } = useQuery('singleProduct', () => fetch(`http://localhost:5000/singleProduct/${id}`,{
-        headers:{
+    const { data: singleProduct, isLoading, refetch } = useQuery('singleProduct', () => fetch(`https://quiet-chamber-70480.herokuapp.com/singleProduct/${id}`, {
+        headers: {
 
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -33,7 +33,7 @@ const Purchase = () => {
         const newQuantity = { availableQuantity: setQuantity };
 
         if (availableQuantity > parseInt(data.purchaseQte)) {
-            fetch(`http://localhost:5000/product/${id}`, {
+            fetch(`https://quiet-chamber-70480.herokuapp.com/product/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
@@ -53,7 +53,7 @@ const Purchase = () => {
                             img: img,
                             paymentStatus: false
                         }
-                        fetch(`http://localhost:5000/order`, {
+                        fetch(`https://quiet-chamber-70480.herokuapp.com/order`, {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json',
@@ -63,7 +63,7 @@ const Purchase = () => {
                         })
                             .then(res => res.json())
                             .then(inserted => {
-                                if(inserted.insertedId){
+                                if (inserted.insertedId) {
                                     console.log(inserted);
                                     refetch();
                                     reset()
@@ -75,11 +75,11 @@ const Purchase = () => {
                                         confirmButtonColor: '#3085d6',
                                         cancelButtonColor: '#d33',
                                         confirmButtonText: "Let's Go"
-                                      }).then((result) => {
+                                    }).then((result) => {
                                         if (result.isConfirmed) {
-                                          navigate(`/order/${inserted.insertedId}`)
+                                            navigate(`/order/${inserted.insertedId}`)
                                         }
-                                      })
+                                    })
                                 }
                             })
                     }

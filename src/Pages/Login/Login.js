@@ -1,3 +1,4 @@
+import cogoToast from 'cogo-toast';
 import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -17,16 +18,13 @@ const Login = () => {
     if (user) {
         console.log(user);
     }
-    const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password);
-    };
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     const [token] = useToken(user || gUser)
-
-
+    
+    
     useEffect(() => {
         if (token) {
             navigate(from, { replace: true })
@@ -35,6 +33,12 @@ const Login = () => {
     if (loading || gLoading) {
         return <Loading></Loading>
     }
+    if(error || gError){
+        cogoToast.error(`${error.message || gError.message}`, {heading:'Error',position:'top-right'})
+    }
+    const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password);
+    };
 
     return (
         <div className="card w-96 m-auto bg-base-100 shadow-xl mt-9">

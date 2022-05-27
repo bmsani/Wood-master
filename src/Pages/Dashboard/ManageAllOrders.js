@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import Loading from '../Shared/Loading';
 
 const ManageAllOrders = () => {
-    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/order`, {
+    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`https://quiet-chamber-70480.herokuapp.com/order`, {
         method: 'Get',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -24,7 +24,7 @@ const ManageAllOrders = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `http://localhost:5000/order/${id}`
+                const url = `https://quiet-chamber-70480.herokuapp.com/order/${id}`
                 fetch(url, {
                     method: 'DELETE',
                     headers: {
@@ -46,28 +46,28 @@ const ManageAllOrders = () => {
 
             }
         })
-    } 
+    }
 
     const handleShipping = id => {
-        const shippinStatus = {shipped: true};
-        fetch(`http://localhost:5000/order/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                body: JSON.stringify(shippinStatus)
+        const shippinStatus = { shipped: true };
+        fetch(`https://quiet-chamber-70480.herokuapp.com/order/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(shippinStatus)
+        })
+            .then(res => res.json())
+            .then(updated => {
+                if (updated.modifiedCount) {
+                    Swal.fire(
+                        'Product Shipped',
+                        'success'
+                    )
+                    refetch();
+                }
             })
-                .then(res => res.json())
-                .then(updated => {
-                    if(updated.modifiedCount){
-                        Swal.fire(
-                            'Product Shipped',
-                            'success'
-                          )
-                          refetch();
-                    }
-                })
     }
     return (
         <table className="table w-full">
@@ -101,19 +101,19 @@ const ManageAllOrders = () => {
                             <div className='grid grid-flow-col gap-2'>
                                 {
                                     order.paymentStatus
-                                    ?
-                                    <button className='btn btn-xs btn-error btn-disabled'>Delete</button>
-                                    :
-                                    <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error'>Delete</button>
+                                        ?
+                                        <button className='btn btn-xs btn-error btn-disabled'>Delete</button>
+                                        :
+                                        <button onClick={() => handleDelete(order._id)} className='btn btn-xs btn-error'>Delete</button>
                                 }
                                 {
                                     order.paymentStatus && !order.shipped
-                                    ?
-                                    <button onClick={() => handleShipping(order._id)} className='btn btn-xs btn-success'>Ship</button>
-                                    :
-                                    <button className='btn btn-xs btn-success btn-disabled'>Ship</button>
+                                        ?
+                                        <button onClick={() => handleShipping(order._id)} className='btn btn-xs btn-success'>Ship</button>
+                                        :
+                                        <button className='btn btn-xs btn-success btn-disabled'>Ship</button>
                                 }
-                                    
+
                             </div>
                         </td>
 
