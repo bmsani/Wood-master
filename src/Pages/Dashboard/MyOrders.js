@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
 
 const MyOrders = () => {
+    const navigate = useNavigate()
     const [user] = useAuthState(auth);
     const email = user?.email;
     const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`http://localhost:5000/order?email=${email}`, {
@@ -16,8 +18,9 @@ const MyOrders = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-
-    // const {price,quantity,img,productName,price,} = 
+    const handlePay = id => {
+        navigate(`/order/${id}`)
+    }
     return (
         <table className="table w-full">
             <thead>
@@ -26,8 +29,8 @@ const MyOrders = () => {
                     <th>Product Image</th>
                     <th>Product Name</th>
                     <th>Quantity</th>
-                    <th>Payment Status</th>
                     <th>Total Price</th>
+                    <th>Payment Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,8 +46,19 @@ const MyOrders = () => {
                         </td>
                         <td>{order.productName}</td>
                         <td>{order.quantity}</td>
-                        <td>{order.paymentStatus? 'Paid':'unpaid'}</td>
                         <td>$ {order.price}/=</td>
+                        <td>
+                            {
+                                order.paymentStatus
+                                    ?
+                                    'Paid'
+                                    :
+                                    <>
+                                        <span>Unpaid</span>
+                                        <button onClick={() => handlePay(order._id)} className='btn btn-sm btn-info text-white mx-2'>Pay now</button>
+                                    </>
+                            }
+                        </td>
 
                     </tr>)
                 }
