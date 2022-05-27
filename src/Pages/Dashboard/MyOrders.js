@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,19 @@ const MyOrders = () => {
     const navigate = useNavigate()
     const [user] = useAuthState(auth);
     const email = user?.email;
-    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch(`https://quiet-chamber-70480.herokuapp.com/order?email=${email}`, {
-        method: 'Get',
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-    }).then(res => res.json()))
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    const [orders, setOrders] = useState([])
+
+
+    useEffect(() => {
+        const url = `https://quiet-chamber-70480.herokuapp.com/userOrder?email=${email}`
+        fetch(url, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setOrders(data));
+    }, [email])
     const handlePay = id => {
         navigate(`/order/${id}`)
     }
