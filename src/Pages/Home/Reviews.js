@@ -15,9 +15,9 @@ const Reviews = () => {
     return (
         <div>
             <h1 className='text-5xl text-center font-bold text-error py-10'>Customer Reviews</h1>
-            <div className='grid grid-cols-1 lg:grid-cols-3 w-10/12 mx-auto'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 w-10/12 mx-auto gap-5'>
                 {
-                    slicedReviews?.map(review => <div className="card w-96 bg-base-100 shadow-xl mt-8">
+                    slicedReviews?.map(review => <div className="card card-compact w-96 lg:w-full bg-base-100 shadow-xl mt-8">
                         <div className="card-body">
                             <h2 className="card-title text-info"> <span className='text-black'>Email : </span>{review.email}</h2>
                             <p> <span className='font-bold'>Customer Rating :</span> {review.rating}</p>
